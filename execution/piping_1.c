@@ -12,44 +12,45 @@
 
 #include "execution.h"
 
-void	execute_piped_cmd(t_tools *tools)
-{
-	int		i;
-	int		n;
-
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGINT, SIG_DFL);
-	if (!tools->cmd->name)
-		exit(*(tools->r_stat));
-	i = is_builtins(tools->cmd->name);
-	if (i)
-		(execute_builtin(i, tools), n = *tools->r_stat, \
-			clean_up(tools), exit(n));
-	else if (ft_strchr(tools->cmd->name, '/'))
-	{
-		tools->envp = vars_to_envp(tools);
-		if (execve(tools->cmd->name, tools->cmd->args, tools->envp) == -1)
-			return (execve_error(tools), n = *tools->r_stat, clean_up(tools), \
-					exit(n));
-	}
-	else
-		exec_no_path_cmd_pipe(tools);
-}
-
-void	exec_no_path_cmd_pipe(t_tools *tools)
+int	check_cmd_valdity(char *str, t_tools *tools)
 {
 	char	*path;
-	int		n;
 
-	path = get_executable_path(tools->cmd->name, tools->aloc, *(tools->env));
-	if (path)
+	if (str && is_builtins(str))
+		return (1);
+	else if (str && ft_strchr(str, '/'))
 	{
-		tools->envp = vars_to_envp(tools);
-		tools->cmd->name = path;
-		if (execve(tools->cmd->name, tools->cmd->args, tools->envp) == -1)
-			return (execve_error(tools), n = *tools->r_stat, clean_up(tools), \
-					exit(n));
+		if (file_error_handler(str, tools->r_stat))
+			return (1);
 	}
+	else if (str)
+	{
+		path = get_executable_path(str, tools->aloc, *(tools->env));
+		if (path)
+			return (1);
+		else
+		{
+			print_error("minishell: ");
+			print_error(tools->cmd->name);
+			print_error(": command not found\n");
+			*(tools->r_stat) = 127;
+		}
+	}
+	tools->cmd->name = NULL;
+	return (0);
+}
+
+int	count_cmd_list(t_cmd *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd)
+	{
+		i++;
+		cmd = cmd->next;
+	}
+	return (i);
 }
 
 void	close_fds(int pipe_count, int **arr, t_tools *tools)

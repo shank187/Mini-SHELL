@@ -29,7 +29,7 @@ void	output_redirection(t_tools *tools)
 	{
 		cur = cur->next;
 	}
-	if (cur->fd != -11)
+	if (cur->fd != -11 && cur->fd > 0)
 		if (dup2(cur->fd, STDOUT_FILENO) == -1)
 			critical_error("dup2", NULL, 0, tools->r_stat);
 }
@@ -43,7 +43,7 @@ void	input_redirection(t_tools *tools)
 	{
 		cur = cur->next;
 	}
-	if (cur->fd != -11)
+	if (cur->fd != -11 && cur->fd > 0)
 		if (dup2(cur->fd, STDIN_FILENO) == -1)
 			critical_error("dup2", NULL, 0, tools->r_stat);
 }

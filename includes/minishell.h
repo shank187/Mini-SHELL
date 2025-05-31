@@ -100,8 +100,6 @@ int				ft_isspace(int c);
 char			*ft_itoa(int n, t_sp_var *va);
 void			signals(int heredoc_mode);
 void			clean_garbage(t_malloc **aloc);
-void			critical_error(char *syscall, t_tools *tools, \
-	int quit, int *r_stat);
 void			clean_files(t_tools *tools);
 void			ft_putstr_fd(char *s, int fd);
 void			*ft_memset(void *b, int c, size_t len);

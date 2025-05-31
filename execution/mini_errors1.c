@@ -33,3 +33,16 @@ void	print_error(const char *msg)
 {
 	ft_putstr_fd((char *)msg, 2);
 }
+
+void	critical_error(char *syscall, t_tools *tools, int quit, int *r_stat)
+{
+	perror(syscall);
+	if (quit)
+	{
+		if (strcmp(syscall, "malloc"))
+			clean_up(tools);
+		exit(EXIT_FAILURE);
+	}
+	else
+		*r_stat = 1;
+}

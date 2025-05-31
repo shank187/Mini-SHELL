@@ -90,5 +90,9 @@ void	remove_node(t_env *prev, t_env *target, t_env **vars, \
 			t_malloc **alloc);
 void	print_error(const char *msg);
 void	cd_error(char *path);
+int		count_cmd_list(t_cmd *cmd);
+int		check_cmd_valdity(char *str, t_tools *tools);
+void			critical_error(char *syscall, t_tools *tools, \
+	int quit, int *r_stat);
 
 #endif

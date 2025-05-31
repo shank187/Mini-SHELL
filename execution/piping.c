@@ -12,45 +12,44 @@
 
 #include "execution.h"
 
-int	check_cmd_valdity(char *str, t_tools *tools)
+void	exec_no_path_cmd_pipe(t_tools *tools)
 {
 	char	*path;
+	int		n;
 
-	if (str && is_builtins(str))
-		return (1);
-	else if (str && ft_strchr(str, '/'))
+	path = get_executable_path(tools->cmd->name, tools->aloc, *(tools->env));
+	if (path)
 	{
-		if (file_error_handler(str, tools->r_stat))
-			return (1);
+		tools->envp = vars_to_envp(tools);
+		tools->cmd->name = path;
+		if (execve(tools->cmd->name, tools->cmd->args, tools->envp) == -1)
+			return (execve_error(tools), n = *tools->r_stat, clean_up(tools), \
+					exit(n));
 	}
-	else if (str)
-	{
-		path = get_executable_path(str, tools->aloc, *(tools->env));
-		if (path)
-			return (1);
-		else
-		{
-			print_error("minishell: ");
-			print_error(tools->cmd->name);
-			print_error(": command not found\n");
-			*(tools->r_stat) = 127;
-		}
-	}
-	tools->cmd->name = NULL;
-	return (0);
 }
 
-int	count_cmd_list(t_cmd *cmd)
+void	execute_piped_cmd(t_tools *tools)
 {
-	int	i;
+	int		i;
+	int		n;
 
-	i = 0;
-	while (cmd)
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
+	if (!tools->cmd->name)
+		exit(*(tools->r_stat));
+	i = is_builtins(tools->cmd->name);
+	if (i)
+		(execute_builtin(i, tools), n = *tools->r_stat, \
+			clean_up(tools), exit(n));
+	else if (ft_strchr(tools->cmd->name, '/'))
 	{
-		i++;
-		cmd = cmd->next;
+		tools->envp = vars_to_envp(tools);
+		if (execve(tools->cmd->name, tools->cmd->args, tools->envp) == -1)
+			return (execve_error(tools), n = *tools->r_stat, clean_up(tools), \
+					exit(n));
 	}
-	return (i);
+	else
+		exec_no_path_cmd_pipe(tools);
 }
 
 void	piped_child(t_tools *tools, int cmd_count, int **arr, int num)
@@ -60,13 +59,15 @@ void	piped_child(t_tools *tools, int cmd_count, int **arr, int num)
 	(void)cmd_count;
 	if (tools->cmd->next)
 		if (dup2(arr[num][1], STDOUT_FILENO) == -1)
-			return (critical_error("dup2", tools, 1, NULL));
+			return (critical_error("dup2 1", tools, 1, NULL));
 	if (num)
 		if (dup2(arr[num - 1][0], STDIN_FILENO) == -1)
-			return (critical_error("dup2", tools, 1, NULL));
-	// close_fds(cmd_count - 1, arr, tools);
+			return (critical_error("dup2 2", tools, 1, NULL));
 	if (tools->cmd->next)
+	{
 		close(arr[num][1]);
+		close(arr[num][0]);
+	}
 	if (num)
 		close(arr[num - 1][0]);
 	redirect_command(tools);
