@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 09:21:39 by abel-had          #+#    #+#             */
-/*   Updated: 2025/05/28 10:16:32 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/05/31 10:18:57 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	process_commands(t_tools *tools, t_sp_var *v)
 	if (v->cmds)
 	{
 		tools->cmd = v->cmds;
+		tools->cmd_head = v->cmds;
 		ft_execute(tools);
-		tools->cmd = v->cmds;
 		clean_files(tools);
 	}
 	else if (v->status == -3)

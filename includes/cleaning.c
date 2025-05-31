@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:24:27 by aelbour           #+#    #+#             */
-/*   Updated: 2025/05/28 12:59:46 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/05/31 10:20:50 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	clean_files(t_tools *tools)
 	t_red	*cursor;
 	t_cmd	*cmd_cur;
 
-	cmd_cur = tools->cmd;
+	cmd_cur = tools->cmd_head;
 	while (cmd_cur)
 	{
 		cursor = cmd_cur->in;

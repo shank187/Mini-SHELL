@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:34:10 by aelbour           #+#    #+#             */
-/*   Updated: 2025/05/26 12:14:46 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/05/31 10:19:11 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ getcwd: cannot access parent directories: No such file or directory\n"
 typedef struct s_tools
 {
 	t_cmd		*cmd;
+	t_cmd		*cmd_head;
 	t_malloc	**aloc;
 	t_env		**env;
 	int			*r_stat;
