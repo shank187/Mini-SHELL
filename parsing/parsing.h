@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 09:50:34 by abel-had          #+#    #+#             */
-/*   Updated: 2025/05/28 08:52:27 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/05/31 11:00:22 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,11 +274,11 @@ void		while_part_if_2_fi(t_sp_var *va, int *x);
 /* Redirection handling */
 int			handle_redirection(t_cmd *cmd, t_token *token, t_sp_var *va,
 				int ss);
-int			heredoc_readline(char **out, t_sp_var *va);
+
 int			process_heredoc(t_sp_var *va);
 int			init_heredoc_buffer(t_sp_var *va);
 int			read_heredoc_line(t_sp_var *va);
-void		expand_heredoc_line(t_sp_var *va);
+void		expand_heredoc_line(t_sp_var *va, char **tmp);
 int			resize_heredoc_buffer(t_sp_var *va);
 int			heredoc_to_temp_file(t_sp_var *va);
 int			handle_red_if1(t_cmd *cmd, t_sp_var *va);
@@ -296,17 +296,6 @@ int			p_with_buffer(t_v *v, t_sp_var *va, char **static_buffer);
 void		update_quote_state(t_sp_var *va, bool *quote);
 t_v			*init_token_vars(t_sp_var *va, bool *quote);
 int			prepare_token(t_sp_var *va, t_v *v);
-
-/* Memory utilities */
-void		*ft_memcpy(void *dst, const void *src, size_t n);
-void		*f_realloc(void *ptr, size_t new_size, t_sp_var *va);
-int			flush_input_buffer(void);
-int			handle_interrupted_read(char **out);
-int			handle_read_error(char **out);
-int			heredoc_read_loop(char **buf, int *len, int *cap, t_sp_var *va);
-int			read_single_char(char *c);
-int			process_character(t_readline *v, t_sp_var *va);
-int			resize_buffer(char **buf, int *cap, t_sp_var *va);
 
 /* Ambiguous token handling */
 void		add_anbiguous_token(t_v *v, t_token **tokens);
@@ -342,5 +331,11 @@ void		p_without_buffer_f(t_v *v, t_sp_var *va, char **static_buffer);
 int			expand_part1(char *str, t_sp_var *va, t_expand *e);
 int			expand_part2(char *str, t_sp_var *va, t_expand *e);
 char		*get_var_value(char *var_name, t_env *env, t_sp_var *va);
+
+void		heredoc_signal(int a);
+int			return_tesult(int result, int fd);
+int			process_heredoc_line(t_sp_var *va, char **tmp, int fd);
+int			sig_return(int fd);
+int			setup_heredoc_reading(int *fd);
 
 #endif

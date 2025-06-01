@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:20:27 by abel-had          #+#    #+#             */
-/*   Updated: 2025/05/26 18:21:08 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/05/30 09:23:43 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	expand_part1(char *str, t_sp_var *va, t_expand *e)
 		e->m = 0;
 		if (g_signal_pid == 0)
 			va->status = va->status;
-		else if (g_signal_pid == -1 || g_signal_pid -2 || g_signal_pid == 2)
+		else if (g_signal_pid == -1)
 		{
 			va->status = 1;
 			g_signal_pid = 0;

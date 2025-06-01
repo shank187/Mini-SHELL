@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 15:34:46 by aelbour           #+#    #+#             */
-/*   Updated: 2025/05/29 09:38:44 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/01 09:21:14 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void			free_ptr(t_malloc **head, void *addr);
 size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 int				ft_isspace(int c);
 char			*ft_itoa(int n, t_sp_var *va);
-void			signals(int heredoc_mode);
+void			signals(void);
 void			clean_garbage(t_malloc **aloc);
 void			clean_files(t_tools *tools);
 void			ft_putstr_fd(char *s, int fd);

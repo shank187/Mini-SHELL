@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 09:21:39 by abel-had          #+#    #+#             */
-/*   Updated: 2025/05/31 10:18:57 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/05/31 11:56:13 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	reset_g(t_sp_var *v)
 {
-	signals(0);
-	if (g_signal_pid == -1 || g_signal_pid == -2 || g_signal_pid == 2)
+	signals();
+	if (g_signal_pid == -1)
 	{
 		v->status = 1;
 		g_signal_pid = 0;
@@ -54,8 +54,8 @@ void	process_commands(t_tools *tools, t_sp_var *v)
 	if (v->cmds)
 	{
 		tools->cmd = v->cmds;
-		tools->cmd_head = v->cmds;
 		ft_execute(tools);
+		tools->cmd = v->cmds;
 		clean_files(tools);
 	}
 	else if (v->status == -3)
@@ -75,6 +75,8 @@ void	main_loop(t_tools *tools, t_sp_var *v, struct termios *terminal)
 		check_line(v);
 		if (*v->line != '\0')
 		{
+			if (g_signal_pid == 3 || g_signal_pid == 2)
+				g_signal_pid = 0;
 			status_manage(v);
 			process_commands(tools, v);
 			clean_garbage(tools->aloc);

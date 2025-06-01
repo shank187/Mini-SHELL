@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:22:46 by abel-had          #+#    #+#             */
-/*   Updated: 2025/05/26 18:25:18 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/05/31 10:59:45 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,13 @@ int	init_heredoc_buffer(t_sp_var *va)
 	return (0);
 }
 
-int	read_heredoc_line(t_sp_var *va)
-{
-	if (g_signal_pid == -2)
-		return (-2);
-	write(1, "> ", 2);
-	va->hrv->n = heredoc_readline(&va->hrv->line, va);
-	if (va->hrv->n == -2)
-		return (-2);
-	if (!va->hrv->line || va->hrv->n == 0)
-		return (-3);
-	if (va->hrv->n > 0 && va->hrv->line[va->hrv->n - 1] == '\n')
-		va->hrv->line[va->hrv->n - 1] = '\0';
-	if (ft_strcmp(va->hrv->line, va->hrv->file_token->value) == 0)
-	{
-		va->status = 0;
-		return (1);
-	}
-	return (0);
-}
-
-void	expand_heredoc_line(t_sp_var *va)
+void	expand_heredoc_line(t_sp_var *va, char **tmp)
 {
 	if (va->hrv->i == 1)
 	{
 		va->var->state = UNQUOTED;
-		va->hrv->tmp = expand_env_vars(va->hrv->line, va);
-		va->hrv->line = va->hrv->tmp;
+		va->hrv->tmp = expand_env_vars(*tmp, va);
+		*tmp = va->hrv->tmp;
 	}
 }
 

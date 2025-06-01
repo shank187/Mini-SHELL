@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:25:32 by abel-had          #+#    #+#             */
-/*   Updated: 2025/05/27 15:38:50 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/05/31 12:05:51 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,24 @@
 
 int	read_heredoc_lines(t_sp_var *va)
 {
-	int	result;
+	int		result;
+	int		fd;
+	char	*tmp;
+	int		line_result;
 
+	if (setup_heredoc_reading(&fd) != 0)
+		return (-1);
 	while (1)
 	{
-		result = read_heredoc_line(va);
-		if (result == -2)
-		{
-			signals(0);
-			return (-2);
-		}
-		if (result != 0)
-			break ;
-		expand_heredoc_line(va);
+		line_result = process_heredoc_line(va, &tmp, fd);
+		if (line_result != 1)
+			return (line_result);
+		expand_heredoc_line(va, &tmp);
 		result = resize_heredoc_buffer(va);
 		if (result != 0)
-			return (result);
-		va->hrv->bib[va->hrv->in++] = va->hrv->line;
+			return (return_tesult(result, fd));
+		va->hrv->bib[va->hrv->in++] = tmp;
+		tmp = NULL;
 	}
 	if (result < 0)
 		return (result);
@@ -44,13 +45,7 @@ int	process_heredoc(t_sp_var *va)
 	result = init_heredoc_buffer(va);
 	if (result != 0)
 		return (result);
-	if (g_signal_pid != -2)
-		g_signal_pid = 2;
-	else
-		return (-2);
-	signals(1);
 	result = read_heredoc_lines(va);
-	signals(0);
 	if (result != 0)
 		return (result);
 	return (heredoc_to_temp_file(va));
@@ -64,7 +59,7 @@ int	handle_red_if1(t_cmd *cmd, t_sp_var *va)
 	(void) cmd;
 	if (va->hrv->redir_type == REDIR_HEREDOC)
 	{
-		if (g_signal_pid != -2)
+		if (g_signal_pid != 3)
 			result = process_heredoc(va);
 		else
 			return (10);
