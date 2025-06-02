@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 09:21:39 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/02 17:15:03 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/02 18:18:15 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	reset_g(t_sp_var *v)
 	if (g_signal_pid == -1)
 	{
 		v->status = 1;
-		printf("status changes to 1\n");
 		g_signal_pid = 0;
 	}
 	if (!isatty(0) || !isatty(1))
