@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 12:21:50 by aelbour           #+#    #+#             */
-/*   Updated: 2025/06/02 17:46:51 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/02 18:05:55 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	no_cmd_error(t_tools *tools)
 
 int	handle_numric_arg_exit(t_tools *tools, char *s)
 {
-	int	i;
+	long long	i;
 
 	i = ft_atoi(s);
 	if (errno == ERANGE)
