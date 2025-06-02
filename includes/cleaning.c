@@ -6,12 +6,11 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:24:27 by aelbour           #+#    #+#             */
-/*   Updated: 2025/05/31 10:20:50 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/02 17:48:48 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	clean_garbage(t_malloc **aloc)
 {
