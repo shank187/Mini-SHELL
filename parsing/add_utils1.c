@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:53:33 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/02 15:27:05 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:51:41 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ int	p_with_buffer(t_v *v, t_sp_var *va, char **static_buffer)
 {
 	if (ambiguous_0(v, va, static_buffer))
 		return (1);
-	else if ((should_expand_token(v, va) && va->var->state != DOUBLE_QUOTED) || (need_expandd(v->new_buff, &va->var->state) && va->var->state != DOUBLE_QUOTED && !v->prev_token))
+	else if ((should_expand_token(v, va) && va->var->state != DOUBLE_QUOTED)
+		|| (need_expandd(v->new_buff, &va->var->state)
+			&& va->var->state != DOUBLE_QUOTED && !v->prev_token))
 		p_ex_with_buffer_1(v, va, static_buffer);
 	else if (p_ex_with_buffer_2(v, va, static_buffer))
 		return (1);
