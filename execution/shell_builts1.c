@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:23:42 by aelbour           #+#    #+#             */
-/*   Updated: 2025/05/28 16:45:39 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/02 14:32:04 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	ft_echo(t_cmd *cmd)
 		nl = 0;
 	while (cmd->args[i])
 	{
-		printf("%s", cmd->args[i]);
+		write(1, cmd->args[i], ft_strlen(cmd->args[i]));
 		if (cmd->args[i + 1])
-			printf(" ");
+			write(1, " ", 1);
 		i++;
 	}
 	if (nl)
@@ -72,10 +72,6 @@ void	update_pwds(t_tools *tools, t_env **env, char *pwd, t_malloc **a)
 	}
 	update_var(tools, ft_strdup(pwd, a, P_ENV), "p.a.t.h");
 	update_var(tools, ft_strdup(pwd, a, P_ENV), "PWD");
-	// else
-	// {
-
-	// }
 }
 
 int	ft_pwd(t_env **env, t_malloc **a, char *to_path, t_tools *tools)

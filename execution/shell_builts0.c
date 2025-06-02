@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:46:22 by aelbour           #+#    #+#             */
-/*   Updated: 2025/05/28 16:42:25 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/02 15:26:26 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void	ft_exit(t_tools *tools, int *status, int n)
 	char		*s;
 	long long	i;
 
-	printf("exit\n");
+	if (tools->will_exit)
+		write(1, "exit\n", 5);
 	if (tools->cmd->args[1])
 	{
 		if (tools->cmd->args[2])

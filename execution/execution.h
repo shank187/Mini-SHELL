@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:34:10 by aelbour           #+#    #+#             */
-/*   Updated: 2025/06/02 13:09:38 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/02 15:26:11 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_tools
 	t_env		**env;
 	int			*r_stat;
 	char		**envp;
+	int			will_exit;
 	t_sp_var	*v;
 }	t_tools;
 

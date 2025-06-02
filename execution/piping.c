@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 15:11:23 by aelbour           #+#    #+#             */
-/*   Updated: 2025/06/02 13:27:51 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/02 15:26:11 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	piped_child(t_tools *tools, int cmd_count, int **arr, int num)
 {
 	int	n;
 
+	tools->will_exit = 0;
 	(void)cmd_count;
 	if (tools->cmd->next)
 		if (dup2(arr[num][1], STDOUT_FILENO) == -1)
