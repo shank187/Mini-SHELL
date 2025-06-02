@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 08:51:06 by abel-had          #+#    #+#             */
-/*   Updated: 2025/05/28 11:07:30 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:11:54 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	init_execution_tools(t_tools *tools, t_sp_var *v, char **envp)
 	tools->env = &(v->env);
 	tools->envp = envp;
 	tools->v = v;
+	tools->cmd_head = NULL;
 	push_envp(tools);
 	init_env_variables(tools, v);
 }

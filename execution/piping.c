@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 15:11:23 by aelbour           #+#    #+#             */
-/*   Updated: 2025/05/29 11:16:46 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/02 13:10:51 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,10 @@ int	manage_pipes_redirection(t_tools *tools, int cmd_count, \
 	{
 		check_cmd_valdity(tools->cmd->name, tools);
 		if (tools->cmd->next && pipe(arr[num]) == -1)
-			perror("pipe");
+			safe_pipe_error("pipe", arr, tools, num);
 		pid = fork();
 		if (pid == -1)
-		{
-			critical_error("fork", tools, 0, tools->r_stat);
-			while (wait(NULL) != -1)
-				;
-			*(tools->r_stat) = 1;
-			close_pipes(arr, num);
-			return (pid);
-		}
+			safe_pipe_error("fork", arr, tools, num);
 		else if (pid == 0)
 			piped_child(tools, cmd_count, arr, num);
 		if (tools->cmd->next)

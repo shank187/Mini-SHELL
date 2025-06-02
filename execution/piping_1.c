@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 12:45:45 by aelbour           #+#    #+#             */
-/*   Updated: 2025/05/29 10:09:36 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/02 13:07:50 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,6 @@ int	count_cmd_list(t_cmd *cmd)
 		cmd = cmd->next;
 	}
 	return (i);
-}
-
-void	close_fds(int pipe_count, int **arr, t_tools *tools)
-{
-	int	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (i < pipe_count)
-	{
-		if (close(arr[i][0]) == -1 || close(arr[i][1]) == -1)
-			critical_error("close", tools, 0, tools->r_stat);
-		i++;
-	}
 }
 
 void	close_pipes(int **arr, int up_to)

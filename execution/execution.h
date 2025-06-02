@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:34:10 by aelbour           #+#    #+#             */
-/*   Updated: 2025/05/31 10:19:11 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/02 13:09:38 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void	print_error(const char *msg);
 void	cd_error(char *path);
 int		count_cmd_list(t_cmd *cmd);
 int		check_cmd_valdity(char *str, t_tools *tools);
-void			critical_error(char *syscall, t_tools *tools, \
+void	critical_error(char *syscall, t_tools *tools, \
 	int quit, int *r_stat);
+void	safe_pipe_error(char *error, int **arr, t_tools *tools, int num);
 
 #endif
