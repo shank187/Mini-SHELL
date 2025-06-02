@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:58:16 by abel-had          #+#    #+#             */
-/*   Updated: 2025/05/27 11:21:44 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:20:22 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,16 @@ void	wait_or_add(t_v *v, t_sp_var *va, char **static_buffer)
 		p_ex_without_buffer_fill(v, va, static_buffer);
 	else
 	{
-		v->s = -1;
-		while (v->bib[++v->s])
-			add_expanded_token(v, &va->var->tokens, v->bib[v->s], va);
+		if (!v->bib[0])
+		{
+			add_expanded_token(v, &va->var->tokens, NULL, va);
+		}
+		else
+		{
+			v->s = -1;
+			while (v->bib[++v->s])
+				add_expanded_token(v, &va->var->tokens, v->bib[v->s], va);
+		}
 		*static_buffer = NULL;
 	}
 }
