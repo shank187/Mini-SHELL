@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 15:34:46 by aelbour           #+#    #+#             */
-/*   Updated: 2025/06/01 09:21:14 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:22:27 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void			clean_garbage(t_malloc **aloc);
 void			clean_files(t_tools *tools);
 void			ft_putstr_fd(char *s, int fd);
 void			*ft_memset(void *b, int c, size_t len);
-int				reset_g(t_sp_var *v);
 void			check_line(t_sp_var *v);
 void			status_manage(t_sp_var *v);
 void			process_commands(t_tools *tools, t_sp_var *v);

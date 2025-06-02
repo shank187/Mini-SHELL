@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 15:57:56 by aelbour           #+#    #+#             */
-/*   Updated: 2025/06/02 14:34:51 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/02 16:41:41 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ int	ft_strcmp(const char *s1, const char *s2)
 	unsigned char	*us1;
 	unsigned char	*us2;
 
+	if ((!s1 && s2))
+		return (-1);
+	else if (s1 && !s2)
+		return (1);
 	us1 = (unsigned char *)s1;
 	us2 = (unsigned char *)s2;
 	j = 0;
