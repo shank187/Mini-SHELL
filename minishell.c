@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 08:51:06 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/02 15:26:11 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/16 16:54:51 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	init_pwd_variables(t_tools *tools)
 		update_var(tools, ft_strdup(path, tools->aloc, 0), "PWD");
 	}
 	free(path);
-	path = get_key_value("OLDPWD", *(tools->env));
 	update_var(tools, NULL, "OLDPWD");
 }
 

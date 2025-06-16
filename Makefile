@@ -30,26 +30,21 @@ SRC = \
 	parsing/tokenizer_fill.c parsing/tokenizer_fill2.c parsing/tokenizer_fill3.c
 
 OBJ = $(SRC:.c=.o)
-DEP = $(OBJ:.o=.d)
-
-# Compile source files and generate dependency files
-%.o: %.c
-	$(CC) $(CFLAGS) -MMD -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $@
 
+%.o: %.c includes/minishell.h execution/execution.h parsing/parsing.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	$(RM) $(OBJ) $(DEP)
+	$(RM) $(OBJ)
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
-
-# Include dependency files (auto-recompile on header change)
--include $(DEP)
 
 .PHONY: all clean fclean re
