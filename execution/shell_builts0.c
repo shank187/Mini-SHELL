@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:46:22 by aelbour           #+#    #+#             */
-/*   Updated: 2025/06/02 18:18:36 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/17 10:27:52 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,16 +107,13 @@ void	ft_exit(t_tools *tools, int *status, int n)
 		write(1, "exit\n", 5);
 	if (tools->cmd->args[1])
 	{
-		if (tools->cmd->args[2])
+		s = ft_isnum(tools->cmd->args[1], tools->aloc);
+		if (s && !tools->cmd->args[2])
+		handle_numric_arg_exit(tools, s);
+		else if (s)
 			failed_exit_args_num(status);
 		else
-		{
-			s = ft_isnum(tools->cmd->args[1], tools->aloc);
-			if (s)
-				handle_numric_arg_exit(tools, s);
-			else
-				exit_numeric_error(tools->cmd->args[1], tools);
-		}
+			exit_numeric_error(tools->cmd->args[1], tools);
 	}
 	else
 		return (clean_up(tools), exit(n));
