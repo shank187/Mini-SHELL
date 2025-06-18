@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:05:12 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/02 15:27:01 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/18 19:05:49 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	p_ex_with_buffer_1_fi(t_v *v, t_sp_var *va, char **static_buffer)
 
 void	p_ex_with_buffer_1(t_v *v, t_sp_var *va, char **static_buffer)
 {
+	int	l;
+
 	init_first_last(v, va, static_buffer);
 	if (v->ambiguous)
 		va->st_ambiguous = false;
@@ -107,8 +109,15 @@ void	p_ex_with_buffer_1(t_v *v, t_sp_var *va, char **static_buffer)
 		if (v->bib)
 		{
 			v->i = 0;
+			l = 0;
+			while (v->bib[l])
+				l++;
 			while (v->bib[v->i])
-				add_expanded_token(v, &va->var->tokens, v->bib[v->i++], va);
+			{
+				if (!(!ft_isspace(v->first) && l == 1))
+					add_expanded_token(v, &va->var->tokens, v->bib[v->i], va);
+				v->i++;
+			}
 		}
 		*static_buffer = NULL;
 	}
