@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:59:45 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/02 15:27:36 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/18 18:04:33 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	p_without_buffer(t_v *v, t_sp_var *va, char **static_buffer)
 		|| (need_expandd(v->new_buff, &va->var->state)
 			&& va->var->state != DOUBLE_QUOTED && !v->prev_token))
 		p_without_buffer_f(v, va, static_buffer);
-	else if (should_expand_token(v, va) && va->var->state == DOUBLE_QUOTED)
+	else if (p_without_buffer_dq_condition(v, va))
 	{
 		v->expanded_value = expand_env_vars(v->new_buff, va);
 		if (va->var->wait_more_args)

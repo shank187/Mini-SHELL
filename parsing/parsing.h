@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 09:50:34 by abel-had          #+#    #+#             */
-/*   Updated: 2025/05/31 11:00:22 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/18 18:05:44 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,5 +337,7 @@ int			return_tesult(int result, int fd);
 int			process_heredoc_line(t_sp_var *va, char **tmp, int fd);
 int			sig_return(int fd);
 int			setup_heredoc_reading(int *fd);
+
+int			p_without_buffer_dq_condition(t_v *v, t_sp_var *va);
 
 #endif
