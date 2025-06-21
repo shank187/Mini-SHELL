@@ -7,7 +7,7 @@ LDFLAGS = -L$(HOME)/.local/lib -lreadline
 RM = rm -f
 
 SRC = \
-	minishell.c minishell_utils.c \
+	minishell.c minishell_utils.c minishell_utils2.c\
 	execution/builtin_tools.c execution/execute.c execution/execute_1.c \
 	execution/mini_errors0.c execution/mini_errors1.c \
 	execution/pipes_errors.c execution/piping.c execution/piping_1.c \

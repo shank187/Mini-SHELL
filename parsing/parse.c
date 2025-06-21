@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:47:48 by abel-had          #+#    #+#             */
-/*   Updated: 2025/05/27 14:15:43 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:48:03 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,18 +86,6 @@ void	detect_ambiguous(t_sp_var *va, t_token *tokens)
 	{
 		if (curr->ambiguous)
 			va->ambig = true;
-		curr = curr->next;
-	}
-}
-void detect_heredoc_limit(t_sp_var *va, t_token *tokens)
-{
-	t_token	*curr;
-
-	curr = tokens;
-	while (curr)
-	{
-		if (curr->type == red && ft_strcmp(curr->value, "<<") == 0)
-			va->vpt->count_heredoc++;
 		curr = curr->next;
 	}
 }

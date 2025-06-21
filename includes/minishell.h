@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 15:34:46 by aelbour           #+#    #+#             */
-/*   Updated: 2025/06/02 16:22:27 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/21 11:52:33 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,7 @@ void			process_commands(t_tools *tools, t_sp_var *v, bool just_space);
 void			main_loop(t_tools *tools, t_sp_var *v, \
 	struct termios *terminal);
 void			close_pipes(int **arr, int up_to);
+int				reset_g(t_sp_var *v);
+bool			ft_just_space(char *str);
 
 #endif

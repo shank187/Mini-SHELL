@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 09:21:39 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/02 18:18:15 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/06/21 11:34:10 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	status_manage(t_sp_var *v)
 	{
 		print_error("minishell: maximum here-document count exceeded\n");
 		exit (2);
-	}	
+	}
 	if (v->a != 1)
 		free(v->line);
 	if (v->status == -3)
@@ -61,7 +61,7 @@ bool	ft_just_space(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if(str[i] != ' ' && str[i] != '\t')
+		if (str[i] != ' ' && str[i] != '\t')
 			return (false);
 		i++;
 	}
@@ -70,7 +70,6 @@ bool	ft_just_space(char *str)
 
 void	process_commands(t_tools *tools, t_sp_var *v, bool just_space)
 {
-	
 	if (v->cmds)
 	{
 		tools->cmd = v->cmds;
@@ -79,39 +78,9 @@ void	process_commands(t_tools *tools, t_sp_var *v, bool just_space)
 		clean_files(tools);
 	}
 	else if (v->status == -3)
-	g_signal_pid = 0;
+		g_signal_pid = 0;
 	else if (v->status != 999 && !just_space)
-	v->status = 258;
+		v->status = 258;
 	else if (v->status == 999)
-	v->status = 1;
-}
-
-void	main_loop(t_tools *tools, t_sp_var *v, struct termios *terminal)
-{
-	bool just_space;
-	
-	while (1)
-	{
-		if (reset_g(v))
-		return ;
-		check_line(v);
-		if (*v->line != '\0')
-		{
-			just_space = ft_just_space(v->line);
-			if (g_signal_pid == 3 || g_signal_pid == 2)
-				g_signal_pid = 0;
-			status_manage(v);
-			if (g_signal_pid == -1)
-			{
-				v->status = 1;
-				g_signal_pid = 0;
-			}
-			process_commands(tools, v, just_space);
-			clean_garbage(tools->aloc);
-		}
-		else if (v->line && v->line[0] == '\0')
-			free(v->line);
-		v->a = 0;
-		tcsetattr(0, TCSANOW, terminal);
-	}
+		v->status = 1;
 }

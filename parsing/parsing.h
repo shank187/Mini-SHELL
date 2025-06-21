@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 09:50:34 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/19 09:00:35 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:48:38 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -345,4 +345,6 @@ int			resize_expand_buffer(t_expand *e, t_sp_var *va, size_t needed);
 char		*handle_expansion(char *str, t_sp_var *va, t_expand *e);
 int			expand_part0(char *str, t_sp_var *va, t_expand *e);
 char		**ft_spplit(char *str, char *charset, t_sp_var *va);
+void		detect_heredoc_limit(t_sp_var *va, t_token *tokens);
+
 #endif

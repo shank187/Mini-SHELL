@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:39:34 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/02 15:03:45 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:48:22 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,17 @@ void	add_argument(t_cmd *cmd, char *arg, t_sp_var *va)
 	cmd->args[cmd->arg_count] = ft_strdup(arg, &va->allocs, P_GARBAGE);
 	cmd->arg_count++;
 	cmd->args[cmd->arg_count] = NULL;
+}
+
+void	detect_heredoc_limit(t_sp_var *va, t_token *tokens)
+{
+	t_token	*curr;
+
+	curr = tokens;
+	while (curr)
+	{
+		if (curr->type == red && ft_strcmp(curr->value, "<<") == 0)
+			va->vpt->count_heredoc++;
+		curr = curr->next;
+	}
 }

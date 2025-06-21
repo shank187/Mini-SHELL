@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/21 11:41:22 by abel-had          #+#    #+#             */
+/*   Updated: 2025/06/21 11:47:16 by abel-had         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 int	ft_is_sep(char c, char *sep)
@@ -69,8 +81,11 @@ char	**ft_spplit(char *str, char *charset, t_sp_var *va)
 	int		word_len;
 	char	**arr;
 
+	if (!str || !charset)
+		return (NULL);
 	word_len = ft_words(str, charset);
-	arr = (char **) mmallocc((word_len + 1) * sizeof(char **), &va->allocs, P_GARBAGE);
+	arr = (char **) mmallocc((word_len + 1) * sizeof(char **),
+			&va->allocs, P_GARBAGE);
 	if (!arr)
 		return (NULL);
 	j = 0;
