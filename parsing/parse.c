@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:47:48 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/21 11:48:03 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:08:00 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_cmd	*parse_tokens(t_token *tokens, t_sp_var *va)
 		return (NULL);
 	va->ambig = false;
 	detect_heredoc_limit(va, tokens);
-	if (va->vpt->count_heredoc == 17)
+	if (va->vpt->count_heredoc >= 17)
 	{
 		va->status = 2;
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 15:34:46 by aelbour           #+#    #+#             */
-/*   Updated: 2025/06/21 11:52:33 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:01:46 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_malloc		t_malloc;
 typedef struct s_tools		t_tools;
 typedef struct s_sp_var		t_sp_var;
 extern int					g_signal_pid;
-
 # define SECURE_PATH "/mnt/homes/aelbour/tools/\
 cmake-4.0.0-macos-universal/CMake.app/Contents/bi\
 :/usr/local/bin:/usr/bin:/bin:\
