@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:25:44 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/18 19:06:12 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:38:21 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	add_token_with_type_fill(t_v *v, t_sp_var *va, char **static_buffer)
 	if (!prepare_token(va, v))
 		return (0);
 	if (v->buff && ft_strlen(v->buff) >= 1
-		&& v->buff[ft_strlen(v->buff) - 1] == '$')
+		&& v->buff[ft_strlen(v->buff) - 1] == '$'
+		&& va->previous_state == UNQUOTED)
 		v->buff[ft_strlen(v->buff) - 1] = '\0';
 	return (1);
 }
@@ -58,6 +59,7 @@ int	add_token_with_type(t_sp_var *va)
 		return (0);
 	if (!add_token_with_type_fill(v, va, &static_buffer))
 		return (0);
+	va->previous_state = va->var->state;
 	if (!ft_ambiguous_red(v))
 		ambiguous_red = false;
 	va->st_ambiguous = ambiguous;

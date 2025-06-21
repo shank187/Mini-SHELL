@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 09:50:34 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/21 11:48:38 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:37:18 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ typedef struct s_sp_var
 	bool		st_ambiguous;
 	int			tmp;
 	int			a;
+	int			previous_state;
 }	t_sp_var;
 
 typedef struct s_expand
