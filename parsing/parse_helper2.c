@@ -103,6 +103,8 @@ int	while_part(t_sp_var *va)
 		a = while_part_fiill(va, &x);
 		if (a != 1)
 			return (a);
+		if (va->vpt->count_heredoc >= 17)
+			return (17);
 	}
 	while_part_print_err(va, &x);
 	if (va->vpt->syn_err)

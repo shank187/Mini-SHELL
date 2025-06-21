@@ -45,7 +45,7 @@ void	p_ex_without_buffer(t_v *v, t_sp_var *va, char **static_buffer)
 		v->last = v->expanded_value[ft_strlen(v->expanded_value) - 1];
 	else if (ft_strlen(v->expanded_value) <= 0)
 		v->last = '\0';
-	v->bib = ft_split(v->expanded_value, ' ', &va->allocs);
+	v->bib = ft_spplit(v->expanded_value, " \t", va);
 	if (va->var->wait_more_args)
 		p_ex_without_buffer_fill(v, va, static_buffer);
 	else

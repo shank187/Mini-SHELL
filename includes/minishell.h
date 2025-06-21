@@ -105,7 +105,7 @@ void			ft_putstr_fd(char *s, int fd);
 void			*ft_memset(void *b, int c, size_t len);
 void			check_line(t_sp_var *v);
 void			status_manage(t_sp_var *v);
-void			process_commands(t_tools *tools, t_sp_var *v);
+void			process_commands(t_tools *tools, t_sp_var *v, bool just_space);
 void			main_loop(t_tools *tools, t_sp_var *v, \
 	struct termios *terminal);
 void			close_pipes(int **arr, int up_to);

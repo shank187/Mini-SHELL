@@ -53,7 +53,7 @@ int	process_heredoc(t_sp_var *va)
 
 int	handle_red_if1(t_cmd *cmd, t_sp_var *va)
 {
-	int	result;
+	int			result;
 
 	result = 0;
 	(void) cmd;

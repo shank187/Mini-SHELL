@@ -45,7 +45,7 @@ void	init_first_last(t_v *v, t_sp_var *va, char **static_buffer)
 		v->first = v->expanded_value[0];
 		v->last = v->expanded_value[ft_strlen(v->expanded_value) - 1];
 	}
-	v->bib = ft_split(v->expanded_value, ' ', &va->allocs);
+	v->bib = ft_spplit(v->expanded_value, " \t", va);
 	v->i = 0;
 	l = 0;
 	while (v->bib[l])
@@ -66,7 +66,7 @@ void	init_first_last_ambig(t_v *v, t_sp_var *va, char **static_buffer)
 		v->first = v->expanded_value[0];
 		v->last = v->expanded_value[ft_strlen(v->expanded_value) - 1];
 	}
-	v->bib = ft_split(v->expanded_value, ' ', &va->allocs);
+	v->bib = ft_spplit(v->expanded_value, " \t", va);
 	while (v->bib[v->i])
 		v->i++;
 	if (v->i > 1)

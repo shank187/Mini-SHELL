@@ -26,8 +26,8 @@ SRC = \
 	parsing/parsing.c \
 	parsing/read_heredoc_line_util.c \
 	parsing/tokenizer.c parsing/tokenizer_1utils.c parsing/tokenizer_2utils.c \
-	parsing/tokenizer_3utils.c parsing/tokenizer_4utils.c \
-	parsing/tokenizer_fill.c parsing/tokenizer_fill2.c parsing/tokenizer_fill3.c
+	parsing/tokenizer_3utils.c parsing/tokenizer_4utils.c  parsing/expand_var_utils2.c\
+	parsing/tokenizer_fill.c parsing/tokenizer_fill2.c parsing/tokenizer_fill3.c parsing/ft_split.c
 
 OBJ = $(SRC:.c=.o)
 
