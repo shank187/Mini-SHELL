@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 11:40:35 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/21 11:40:51 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:12:37 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	main_loop(t_tools *tools, t_sp_var *v, struct termios *terminal)
 {
 	while (1)
 	{
+		v->previous_state = -1;
 		if (reset_g(v))
 			return ;
 		check_line(v);
