@@ -66,6 +66,7 @@ int	handle_red_if1(t_cmd *cmd, t_sp_var *va)
 	}
 	else if (va->hrv->redir_type == REDIR_IN)
 	{
+		va->status = 0;
 		va->hrv->redir->fd = open(va->hrv->redir->file, O_RDONLY);
 	}
 	if (va->hrv->redir->fd != -11 && va->hrv->redir->fd != -1
@@ -92,6 +93,7 @@ int	handle_red_if2(t_cmd *cmd, t_sp_var *va)
 
 int	open_outfile(t_sp_var *va)
 {
+	va->status = 0;
 	if (va->hrv->redir_type == REDIR_APPEND && !va->vpt->current_cmd->am)
 		va->hrv->redir->fd = open(va->hrv->redir->file, O_WRONLY
 				| O_CREAT | O_APPEND, 0644);
