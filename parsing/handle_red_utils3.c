@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:28:49 by abel-had          #+#    #+#             */
-/*   Updated: 2025/05/27 15:59:21 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/26 11:56:07 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	while_print_err(t_sp_var *va, int *x)
 		va->vpt->s = 0;
 		*x = 1;
 	}
+	if (*x == 1)
+		va->vpt->current_cmd->name = NULL;
 }
 
 void	while_part_if_2_fi(t_sp_var *va, int *x)
