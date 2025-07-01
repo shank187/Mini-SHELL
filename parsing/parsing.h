@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdelhamid <abdelhamid@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 09:50:34 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/21 13:37:18 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/07/01 15:01:49 by abdelhamid       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,5 +347,7 @@ char		*handle_expansion(char *str, t_sp_var *va, t_expand *e);
 int			expand_part0(char *str, t_sp_var *va, t_expand *e);
 char		**ft_spplit(char *str, char *charset, t_sp_var *va);
 void		detect_heredoc_limit(t_sp_var *va, t_token *tokens);
+
+char		**two_part_split(char *str, t_sp_var *va);
 
 #endif

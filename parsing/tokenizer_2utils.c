@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_2utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdelhamid <abdelhamid@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:25:44 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/28 12:31:13 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/07/01 15:01:17 by abdelhamid       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,49 +27,8 @@ int	add_token_with_type_fill(t_v *v, t_sp_var *va, char **static_buffer)
 		v->buff[ft_strlen(v->buff) - 1] = '\0';
 	return (1);
 }
-char **two_part_split(char *str, t_sp_var *va)
-{
-	int	i = 0;
-	int j = 0;
-	int k = 0;
-	char **bib;
 
-	if (!str)
-		return (NULL);
-	while (str[j] && str[j] != '=')
-		j++;
-	if (str[j] != '=')
-		return (NULL);
-	bib = (char **) mmallocc((3) * sizeof(char *),
-			&va->allocs, P_GARBAGE);
-	bib[0] = (char *) mmallocc((j + 1) * sizeof(char),
-			&va->allocs, P_GARBAGE);
-	while (str[i] != '=')
-	{
-		bib[0][i] = str[i];
-		i++;
-	}
-	bib[0][i] = '\0';
-	if (str[i] == '=')
-		i++;
-	j = i;
-	while (str[j])
-		j++;
-	bib[1] = (char *) mmallocc((j - i + 2) * sizeof(char),
-			&va->allocs, P_GARBAGE);
-	bib[1][k++] = '=';
-	while (str[i])
-	{
-		bib[1][k] = str[i];
-		i++;
-		k++;
-	}
-	bib[1][k] = '\0';
-	bib[2] = NULL;
-	return (bib);
-}
-
-void	big_conditions(t_v *v, t_sp_var *va, char **static_buffer)
+int big_con_part1(t_v *v, t_sp_var *va)
 {
 	static bool	export;
 	char **bib;
@@ -87,10 +46,17 @@ void	big_conditions(t_v *v, t_sp_var *va, char **static_buffer)
 			{
 				v->expanded_value = expand_env_vars(v->new_buff, va);
 				add_expanded_token(v, &va->var->tokens, v->expanded_value, va);
-				return ;
+				return (0);
 			}
 		}
 	}
+	return (1);
+}
+
+void	big_conditions(t_v *v, t_sp_var *va, char **static_buffer)
+{
+	if (!big_con_part1(v, va))
+		return ;
 	if (v->buff)
 	{
 		p_with_buffer(v, va, static_buffer);
