@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:25:44 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/21 13:38:21 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/06/28 12:31:13 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,70 @@ int	add_token_with_type_fill(t_v *v, t_sp_var *va, char **static_buffer)
 		v->buff[ft_strlen(v->buff) - 1] = '\0';
 	return (1);
 }
+char **two_part_split(char *str, t_sp_var *va)
+{
+	int	i = 0;
+	int j = 0;
+	int k = 0;
+	char **bib;
+
+	if (!str)
+		return (NULL);
+	while (str[j] && str[j] != '=')
+		j++;
+	if (str[j] != '=')
+		return (NULL);
+	bib = (char **) mmallocc((3) * sizeof(char *),
+			&va->allocs, P_GARBAGE);
+	bib[0] = (char *) mmallocc((j + 1) * sizeof(char),
+			&va->allocs, P_GARBAGE);
+	while (str[i] != '=')
+	{
+		bib[0][i] = str[i];
+		i++;
+	}
+	bib[0][i] = '\0';
+	if (str[i] == '=')
+		i++;
+	j = i;
+	while (str[j])
+		j++;
+	bib[1] = (char *) mmallocc((j - i + 2) * sizeof(char),
+			&va->allocs, P_GARBAGE);
+	bib[1][k++] = '=';
+	while (str[i])
+	{
+		bib[1][k] = str[i];
+		i++;
+		k++;
+	}
+	bib[1][k] = '\0';
+	bib[2] = NULL;
+	return (bib);
+}
 
 void	big_conditions(t_v *v, t_sp_var *va, char **static_buffer)
 {
+	static bool	export;
+	char **bib;
+
+	if ((!v->prev_token || !ft_strcmp(v->prev_token->value, "|")) && !ft_strcmp(v->new_buff, "export"))
+		export = true;
+	if (!ft_strcmp(v->new_buff, "|") || (!v->prev_token && ft_strcmp(v->new_buff, "export")))
+		export = false;
+	if (va->var->state == UNQUOTED && export && !v->buff && !va->var->wait_more_args)
+	{
+		bib = two_part_split(v->new_buff, va);
+		if (bib != NULL)
+		{
+			if (bib[0] && !need_expandd(bib[0], &va->var->state) && bib[1] && need_expandd(bib[1], &va->var->state))
+			{
+				v->expanded_value = expand_env_vars(v->new_buff, va);
+				add_expanded_token(v, &va->var->tokens, v->expanded_value, va);
+				return ;
+			}
+		}
+	}
 	if (v->buff)
 	{
 		p_with_buffer(v, va, static_buffer);
