@@ -18,7 +18,7 @@ int	add_token_with_type_fill(t_v *v, t_sp_var *va, char **static_buffer)
 	return (1);
 }
 
-int big_con_part1(t_v *v, t_sp_var *va)
+int big_con_part1(t_v *v, t_sp_var *va, char **static_buffer)
 {
 	static bool	export;
 	char **bib;
@@ -27,15 +27,18 @@ int big_con_part1(t_v *v, t_sp_var *va)
 		export = true;
 	if (!ft_strcmp(v->new_buff, "|") || (!v->prev_token && ft_strcmp(v->new_buff, "export")))
 		export = false;
-	if (va->var->state == UNQUOTED && export && !v->buff && !va->var->wait_more_args)
+	if (va->var->state == UNQUOTED && export && !v->buff)
 	{
 		bib = two_part_split(v->new_buff, va);
 		if (bib != NULL)
 		{
-			if (bib[0] && !need_expandd(bib[0], &va->var->state) && bib[1] && need_expandd(bib[1], &va->var->state))
+			if (bib[0] && !need_expandd(bib[0], &va->var->state)&& bib[1] && need_expandd(bib[1], &va->var->state))
 			{
 				v->expanded_value = expand_env_vars(v->new_buff, va);
-				add_expanded_token(v, &va->var->tokens, v->expanded_value, va);
+				if (!va->var->wait_more_args)
+					add_expanded_token(v, &va->var->tokens, v->expanded_value, va);
+				else
+					*static_buffer = ft_strdup(v->expanded_value, &va->allocs, P_GARBAGE);
 				return (0);
 			}
 		}
@@ -45,7 +48,7 @@ int big_con_part1(t_v *v, t_sp_var *va)
 
 void	big_conditions(t_v *v, t_sp_var *va, char **static_buffer)
 {
-	if (!big_con_part1(v, va))
+	if (!big_con_part1(v, va, static_buffer))
 		return ;
 	if (v->buff)
 	{
