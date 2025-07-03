@@ -18,15 +18,21 @@ int	add_token_with_type_fill(t_v *v, t_sp_var *va, char **static_buffer)
 	return (1);
 }
 
-int big_con_part1(t_v *v, t_sp_var *va, char **static_buffer)
+
+int	big_con_part1(t_v *v, t_sp_var *va, char **static_buffer)
 {
 	static bool	export;
-	char **bib;
+	char		**bib;
+	static bool sp;
 
 	if ((!v->prev_token || !ft_strcmp(v->prev_token->value, "|")) && !ft_strcmp(v->new_buff, "export"))
-		export = true;
+	export = true;
 	if (!ft_strcmp(v->new_buff, "|") || (!v->prev_token && ft_strcmp(v->new_buff, "export")))
-		export = false;
+	export = false;
+	if (!v->buff)
+		sp = false;
+	if (!v->buff && va->var->state == UNQUOTED && ft_strlen(v->new_buff) >= 2 && v->new_buff[ft_strlen(v->new_buff) - 1] == '=' && export && va->var->wait_more_args && !need_expandd(v->new_buff, &va->var->state))
+		sp = true;
 	if (va->var->state == UNQUOTED && export && !v->buff)
 	{
 		bib = two_part_split(v->new_buff, va);
@@ -42,6 +48,21 @@ int big_con_part1(t_v *v, t_sp_var *va, char **static_buffer)
 				return (0);
 			}
 		}
+	}
+	else if (va->var->state == UNQUOTED && export && v->buff && sp && need_expandd(v->new_buff, &va->var->state))
+	{
+		v->expanded_value = expand_env_vars(v->new_buff, va);
+		if (va->var->wait_more_args)
+			*static_buffer = ft_strjoin(v->buff, v->expanded_value,
+					&va->allocs);
+		else
+		{
+			*static_buffer = ft_strjoin(v->buff, v->expanded_value,
+					&va->allocs);
+			add_expanded_token(v, &va->var->tokens, *static_buffer, va);
+			*static_buffer = NULL;
+		}
+		return (0);
 	}
 	return (1);
 }
