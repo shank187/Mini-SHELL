@@ -24,7 +24,7 @@ SRC = \
 	parsing/handle_red_utils1.c parsing/handle_red_utils2.c parsing/handle_red_utils3.c \
 	parsing/if_conditions.c parsing/parse.c parsing/parse_helper1.c parsing/parse_helper2.c parsing/parse_helper3.c \
 	parsing/parsing.c \
-	parsing/read_heredoc_line_util.c \
+	parsing/read_heredoc_line_util.c parsing/tokenizer_5utils.c \
 	parsing/tokenizer.c parsing/tokenizer_1utils.c parsing/tokenizer_2utils.c \
 	parsing/tokenizer_3utils.c parsing/tokenizer_4utils.c  parsing/expand_var_utils2.c\
 	parsing/tokenizer_fill.c parsing/tokenizer_fill2.c parsing/tokenizer_fill3.c parsing/ft_split.c parsing/split_two_part.c
