@@ -20,12 +20,21 @@ int	add_token_with_type_fill(t_v *v, t_sp_var *va, char **static_buffer)
 
 static void	set_export_flags(t_v *v, t_sp_var *va)
 {
-	if ((!v->prev_token || !ft_strcmp(v->prev_token->value, "|"))
-		&& !ft_strcmp(v->new_buff, "export"))
+	static bool	first_cmd;
+	static bool	a;
+
+	reset_export_flags(v, va, &a, &first_cmd);
+	if (v->new_token && v->new_token->type == text
+		&& !a && ft_strcmp(v->new_buff, ""))
+		first_cmd = true;
+	if (v->prev_token && v->prev_token->type == red)
+		first_cmd = false;
+	if (first_cmd)
+		a = true;
+	if (((!v->prev_token || !ft_strcmp(v->prev_token->value, "|"))
+			&& !ft_strcmp(v->new_buff, "export"))
+		|| (first_cmd && !ft_strcmp(v->new_buff, "export")))
 		va->export_flag = true;
-	if (!ft_strcmp(v->new_buff, "|")
-		|| (!v->prev_token && ft_strcmp(v->new_buff, "export")))
-		va->export_flag = false;
 	if (!v->buff)
 		va->sp_flag = false;
 	if (!v->buff && va->var->state == UNQUOTED
@@ -34,6 +43,7 @@ static void	set_export_flags(t_v *v, t_sp_var *va)
 		&& va->export_flag && va->var->wait_more_args
 		&& !need_expandd(v->new_buff, &va->var->state))
 		va->sp_flag = true;
+	first_cmd = false;
 }
 
 int	big_con_part1(t_v *v, t_sp_var *va, char **static_buffer)

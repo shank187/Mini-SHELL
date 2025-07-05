@@ -47,3 +47,14 @@ int	handle_export_expansion(t_v *v, t_sp_var *va, char **static_buffer)
 	}
 	return (1);
 }
+
+void	reset_export_flags(t_v *v, t_sp_var *va, bool *a, bool *first_cmd)
+{
+	if (!ft_strcmp(v->new_buff, "|")
+		|| (!v->prev_token && ft_strcmp(v->new_buff, "export")))
+	{
+		va->export_flag = false;
+		*a = false;
+		*first_cmd = false;
+	}
+}

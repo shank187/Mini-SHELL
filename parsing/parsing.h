@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abdelhamid <abdelhamid@student.42.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 09:50:34 by abel-had          #+#    #+#             */
-/*   Updated: 2025/07/03 18:02:51 by abdelhamid       ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
@@ -354,5 +343,6 @@ char		**two_part_split(char *str, t_sp_var *va);
 int			handle_buffered_expansion(t_v *v, t_sp_var *va,
 				char **static_buffer);
 int			handle_export_expansion(t_v *v, t_sp_var *va, char **static_buffer);
+void		reset_export_flags(t_v *v, t_sp_var *va, bool *a, bool *first_cmd);
 
 #endif
