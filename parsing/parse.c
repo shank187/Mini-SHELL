@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:47:48 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/21 12:08:00 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/07/06 13:39:20 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_cmd	*parse_tokens(t_token *tokens, t_sp_var *va)
 		va->status = 999;
 		return (NULL);
 	}
-	if (va->ambig)
-		va->status = 1;
+	// if (va->ambig)
+	// 	va->status = 1;
 	return (va->vpt->commands);
 }

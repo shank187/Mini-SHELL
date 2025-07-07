@@ -1,5 +1,16 @@
-#include "parsing.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer_5utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/06 12:38:50 by abel-had          #+#    #+#             */
+/*   Updated: 2025/07/06 12:38:53 by abel-had         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "parsing.h"
 
 int	handle_buffered_expansion(t_v *v, t_sp_var *va, char **static_buffer)
 {

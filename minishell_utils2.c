@@ -6,7 +6,7 @@
 /*   By: abel-had <abel-had@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 11:40:35 by abel-had          #+#    #+#             */
-/*   Updated: 2025/06/21 14:12:37 by abel-had         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:17:49 by abel-had         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	if_line(t_tools *tools, t_sp_var *v)
 
 void	main_loop(t_tools *tools, t_sp_var *v, struct termios *terminal)
 {
+	int	i;
+
 	while (1)
 	{
 		v->previous_state = -1;
@@ -43,5 +45,8 @@ void	main_loop(t_tools *tools, t_sp_var *v, struct termios *terminal)
 			free(v->line);
 		v->a = 0;
 		tcsetattr(0, TCSANOW, terminal);
+		i = 2;
+		while (++i <= 10240)
+			close(i);
 	}
 }
